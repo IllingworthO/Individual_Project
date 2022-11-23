@@ -22,10 +22,13 @@ order_table = 'orders'
 order_status_list = ["Preparing", "Awaiting Pickup", "Out for Delivery", "Delivered"]
 order_list = import_database(order_table)
 
+#list of sql statement strings.
+sql_log = []
+
 def main():
     while True:
         # PRINT main menu options
-        print_menu("Main Menu", "Exit", "Products Menu", "Couriers Menu", "Orders Menu", "Save Menu")
+        print_menu("Main Menu", "Exit", "Products Menu", "Couriers Menu", "Orders Menu")
         
         # GET user input for main menu option
         choice = get_input_int()
@@ -33,18 +36,20 @@ def main():
         # IF user input is 0:
         #  EXIT app
         if choice == 0:
+            export_to_database(m.sql_log)
+
             print("Closing Programme...")
             break
-        
+
         # # products menu
         # ELSE IF user input is 1:
-        elif choice == 1: 
+        elif choice == 1:
             product_menu()
 
 
         # # Couriers menu
         # ELSE IF user input is 2:
-        elif choice == 2: 
+        elif choice == 2:
             courier_menu()
                 
         # # orders menu
@@ -52,9 +57,11 @@ def main():
         elif choice == 3:
             order_menu()
         
-        #save menu
-        elif choice == 4:
-            save_menu()
+        # #save menu
+        # elif choice == 4:
+        #     for x in sql_log:
+        #         print(x)
+        #     save_menu()
 
 
 if __name__ == '__main__':

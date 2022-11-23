@@ -1,6 +1,7 @@
 import pymysql
 import os
 from dotenv import load_dotenv
+import __main as m
 
 def import_database(table):
     # Load environment variables from .env file
@@ -29,7 +30,6 @@ def import_database(table):
         # fetch all data as a list of dictionaries
         list = cursor.fetchall()
 
-        
         cursor.close()
 
         # Closes the connection to the DB, make sure you ALWAYS do this
@@ -41,7 +41,7 @@ def import_database(table):
         empty_list = []
         return empty_list
 
-def export_to_database(database_table, dict_list):
+def export_to_database(sql_log):
     # Load environment variables from .env file
     load_dotenv()
     host = os.environ.get("mysql_host")
@@ -49,6 +49,7 @@ def export_to_database(database_table, dict_list):
     password = os.environ.get("mysql_pass")
     database = os.environ.get("mysql_db")
 
+    print('Conecting to database...')
     # Establish a database connection
     connection = pymysql.connect(
         host,
@@ -60,20 +61,28 @@ def export_to_database(database_table, dict_list):
     # A cursor is an object that represents a DB cursor, which is used to manage the context of a fetch operation.
     cursor = connection.cursor()
 
-    cursor.execute(f'delete from {database_table}')
+    print('Connected')
+    #cursor.execute(f'delete from {database_table}')
 
     # Add code here to insert a new record
     # sql = "INSERT INTO person (first_name, last_name, age, email) VALUES (%s, %s, %s, %s)"
     # value = ('test', 'testson', '0', 'test@email.email')
     # cursor.execute(sql, value)
 
-    for dict in dict_list:
-        placeholders = ', '.join(['%s'] * len(dict))
-        columns = ', '.join(dict.keys())
-        sql = "INSERT INTO %s ( %s ) VALUES ( %s )" % (database_table, columns, placeholders)
+    # for dict in dict_list:
+    #     placeholders = ', '.join(['%s'] * len(dict))
+    #     columns = ', '.join(dict.keys())
+    #     sql = "INSERT INTO %s ( %s ) VALUES ( %s )" % (database_table, columns, placeholders)
 
-        cursor.execute(sql, list(dict.values()))
+    #     cursor.execute(sql, list(dict.values()))
+    print('Exporting to database...')
+    for statement in sql_log:
+        cursor.execute(statement)
+        print(f'Running {statement}...')
+
+    print('Exporting done...')
 
     connection.commit()
     cursor.close()
     connection.close()
+

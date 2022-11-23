@@ -1,9 +1,10 @@
 import csv
-# #read from products
-# with open(product_path, "r") as f:
-#     reader = csv.DictReader(f)
-#     product_list = list(reader)
-#     #print (a)
+def read_from(path):
+    with open(path, "r") as f:
+        reader = csv.DictReader(f)
+
+    return list(reader)
+       
 
 # #read from courier
 # with open(courier_path, "r") as f:
