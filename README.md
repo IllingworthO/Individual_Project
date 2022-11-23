@@ -12,8 +12,10 @@ My client has launched a pop-up cafe and is offering to deliver home-made lunche
 * They need to be sure my app has been tested and proved to work well.
 * They need to receive regular software updates.
 # How did your design go about meeting the project's requirements?
-My application is able to add, update and delete persisting objects within a database. Upon opening and exiting the application the database is called to import and export data respectively. I have also made sure to periodically run the program and test all the functions and feature to iron out any bugs or issues.
-I also sat down with the client (Instructor) and went over some of the specifics of the requirements, such as what data will be stored int "products", "couriers" and "orders"
+* My application is able to add, update and delete persisting objects within a database. 
+* Upon opening and exiting the application the database is called to import and export data respectively. 
+* I have also made sure to periodically run the program and test all the functions and feature to iron out any bugs or issues.
+* I also sat down with the client (Instructor) and went over some of the specifics of the requirements, such as what data will be stored int "products", "couriers" and "orders"
 # How did you guarantee the project's requirements?
 I have tested the application by sending it to be reviewed by peers and doing group code reviews. On an earlier version of the project I had some unit testing however after a large change in the applications structure the tests became invalid.
 # If you had more time, what is one thing you would improve upon?
